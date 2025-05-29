@@ -11,6 +11,9 @@ public func isBalancedParentheses(input: String) -> Bool {
         } else if c == ")" {
             count -= 1
         }
+        if count < 0 {
+            return false
+        }
     }
     if count == 0 {
         return true
