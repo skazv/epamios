@@ -61,6 +61,8 @@ class PreferencesViewController: UIViewController {
             actionSheet.addAction(UIAlertAction(title: option, style: .default, handler: { _ in
                 OnboardingData.shared.notificationPreference = option
                 self.selectedLabel.text = option
+                let confirmVC = ConfirmDetailsViewController()
+                self.navigationController?.pushViewController(confirmVC, animated: true)
             }))
         }
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))

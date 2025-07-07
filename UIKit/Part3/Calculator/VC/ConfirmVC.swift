@@ -42,7 +42,7 @@ class ConfirmDetailsViewController: UIViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Edit preferences", for: .normal)
-        button.addTarget(self, action: #selector(startOverTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(editPrefsTapped), for: .touchUpInside)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         return button
     }()
@@ -51,7 +51,7 @@ class ConfirmDetailsViewController: UIViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Edit personal info", for: .normal)
-        button.addTarget(self, action: #selector(startOverTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(editPersonalInfoTapped), for: .touchUpInside)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         return button
     }()
@@ -60,7 +60,7 @@ class ConfirmDetailsViewController: UIViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Confirm", for: .normal)
-        button.addTarget(self, action: #selector(startOverTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         return button
     }()
@@ -155,9 +155,6 @@ class ConfirmDetailsViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             OnboardingData.shared.hasCompletedOnboarding = true
             self.navigationController?.popToRootViewController(animated: true)
-            if let root = self.navigationController?.viewControllers.first as? OnboardingViewController {
-                root.viewDidLoad()
-            }
         }))
         present(alert, animated: true)
     }
