@@ -36,12 +36,26 @@ extension ViewController {
             return
         }
         let fileURL = documentsDirectory.appendingPathComponent(fileName)
-
-        do {
-            try text.write(to: fileURL, atomically: true, encoding: .utf8)
-            showAlarm(title: "Message", message: "Success")
-        } catch {
-            showAlarm(message: "\(error)")
+        
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                let fileHandle = try FileHandle(forWritingTo: fileURL)
+                fileHandle.seekToEndOfFile()
+                if let data = text.data(using: .utf8) {
+                    fileHandle.write(data)
+                    fileHandle.closeFile()
+                    showAlarm(title: "Message", message: "Success added")
+                }
+            } catch {
+                showAlarm(message: "\(error)")
+            }
+        } else {
+            do {
+                try text.write(to: fileURL, atomically: true, encoding: .utf8)
+                showAlarm(title: "Message", message: "Success")
+            } catch {
+                showAlarm(message: "\(error)")
+            }
         }
     }
     
